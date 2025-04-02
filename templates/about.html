@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conócenos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/LOGO.png') }}" alt="RT Audio y Video" class="logo">
+            </a>
+        </div>
+        <div class="title-container">
+            <h1>Conócenos</h1>
+        </div>
+        <div class="menu-container">
+            <a href="{{ url_for('home') }}">Inicio</a>
+            <a href="{{ url_for('services') }}">Servicios</a>
+            <a href="{{ url_for('repair') }}">Reparación</a>
+            <a href="{{ url_for('about') }}">Conócenos</a>
+        </div>
+    </div>
+
+    <div class="contenido">
+        <h2>Conoce más sobre nuestra empresa</h2>
+        <p>En RT Audio y Video, nos especializamos en ofrecer reparaciones rápidas y eficaces de equipos electrónicos y electrodomésticos. Nuestro equipo está compuesto por expertos técnicos con años de experiencia en la industria.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 RT Audio y Video. Todos los derechos reservados.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

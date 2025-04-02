@@ -1,0 +1,546 @@
+/* General */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #03045E;
+    color: black;
+}
+
+/* Encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #00007C;
+    color: white;
+    padding: 20px 30px;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+/* Parte izquierda: Logo */
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo {
+    width: 130px;
+    height: auto;
+}
+
+/* Parte central: Título y subtítulo */
+.title-container {
+    flex: 2;
+    text-align: center;
+}
+
+.title-container h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.subtitulo {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Parte derecha: Menú de navegación */
+.menu-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-container a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu-container a:hover {
+    text-decoration: underline;
+}
+
+
+/* Contenido */
+.contenido {
+    flex: 1; /* Empuja el footer hacia abajo */
+    text-align: center;
+}
+
+.contenido h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.contenido p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Imagen de fondo */
+.image-background {
+    background-image: url("../static/images/Reparación.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 66.66%; /* 2/3 de la página */
+    min-height: 300px; /* Ajusta según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Agrega espacio entre la imagen y el footer */
+}
+/* Imagen de fondo */
+.image-background2 {
+    background-image: url("../static/images/Reparación2.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 66.66%; /* 2/3 de la página */
+    min-height: 300px; /* Ajusta según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Agrega espacio entre la imagen y el footer */
+    margin-left: auto; /* Empuja la imagen hacia la derecha */
+}
+/* Imagen de fondo */
+.image-background3 {
+    background-image: url("../static/images/Reparación3.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 66.66%; /* 2/3 de la página */
+    min-height: 300px; /* Ajusta según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Agrega espacio entre la imagen y el footer */
+}
+/* Imagen de fondo */
+.image-background4 {
+    background-image: url("../static/images/Reparación4.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 66.66%; /* 2/3 de la página */
+    min-height: 300px; /* Ajusta según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Agrega espacio entre la imagen y el footer */
+    margin-left: auto; /* Empuja la imagen hacia la derecha */
+}
+/* Imagen de fondo */
+.image-background5 {
+    background-image: url("../static/images/Reparación5.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 66.66%; /* 2/3 de la página */
+    min-height: 300px; /* Ajusta según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    margin-bottom: 0px;
+    margin-top: 0px; /* Agrega espacio entre la imagen y el footer */
+}
+
+/* Texto centrado sobre la imagen */
+.text-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.text-overlay h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+}
+
+/* Asegurar que las imágenes no sean más grandes que la pantalla */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Hacer que el contenido se vea mejor en móviles */
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+/* Ajustar el texto para que no sea muy pequeño en móviles */
+body {
+    font-size: 16px;
+}
+
+/* ==================== FORMULARIO ==================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Añadir margen inferior al contenedor del formulario */
+.form-container {
+    margin-bottom: 40px; /* Puedes ajustar este valor según el espacio que necesites */
+}
+
+/* Agrupación de label y input */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+/* Estilo de etiquetas */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+/* Ajuste de los campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Mejor apariencia del botón */
+button {
+    background: #00007C;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #00005A;
+}
+
+/* Hacer el formulario más responsivo */
+@media (max-width: 600px) {
+    form {
+        width: 100%;
+        padding: 15px;
+    }
+    
+    input, textarea {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .image-background {
+        height: 50vh; /* Reducir la altura en pantallas pequeñas */
+    }
+
+    .text-overlay h2 {
+        font-size: 24px; /* Reducir tamaño del texto en móviles */
+    }
+}
+
+.cta-link {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    transition: color 0.3s ease-in-out;
+}
+
+.cta-link:hover {
+    color: #00007C; /* Cambia a azul al pasar el mouse */
+}
+
+/* Estilos para el contenedor del título de ubicación */
+.ubicacion-container {
+    background-color: #00001f; /* Aplica el mismo fondo que el de servicios */
+    text-align: center;
+    margin-bottom: 0px; /* Ajusta el espacio entre el título y el mapa */
+    padding: 20px 0; /* Añade el padding para darle el mismo espaciado */
+    margin-top: 0;
+}
+
+.ubicacion-container h2 {
+    font-size: 28px;
+    color: white; /* Asegúrate de que el color sea blanco */
+    font-weight: bold;
+}
+
+/* Estilos para el contenedor de ubicación */
+.ubicacion {
+    text-align: center;
+    margin: 50px 0;
+    color: white;
+}
+
+.ubicacion h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Estilo del iframe (mapa de Google) */
+.ubicacion iframe {
+    width: 80%;
+    max-width: 600px;
+    height: 400px;
+    border-radius: 10px;
+}
+/* Estilo de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 12px;  /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo del track (la parte "vacía" de la barra de desplazamiento) */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;  /* Color de fondo de la barra */
+    border-radius: 10px;  /* Bordes redondeados */
+}
+
+/* Estilo del "thumb" (el control que se desliza dentro de la barra) */
+::-webkit-scrollbar-thumb {
+    background-color: #00007C;  /* Color del thumb (el deslizante) */
+    border-radius: 10px;  /* Bordes redondeados del thumb */
+    border: 3px solid #ffffff;  /* Borde blanco para mayor contraste */
+}
+
+/* Estilo al pasar el mouse sobre la barra de desplazamiento */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #00005A;  /* Color del thumb al pasar el ratón */
+}
+
+/* Estilo para el contenedor de "Servicios" con fondo oscuro */
+.servicios-container {
+    background-color: #00001f; /* Fondo oscuro que combina con la paleta de colores */
+    padding: 50px 0; /* Espaciado arriba y abajo del título */
+    width: 100%;
+    text-align: center;
+    margin-top: 0; /* Eliminar margen superior para acercarlo al carrusel */
+}
+
+/* Estilo para el título "Servicios" */
+.servicios-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    color: white; /* Color de texto claro para contrastar con el fondo oscuro */
+}
+
+.image-gallery-container {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    width: 100%;
+    height: 350px;
+    overflow: visible;  /* Evita que las imágenes sobresalgan */
+}
+
+.image-slide {
+    width: calc(100% / 3);
+    flex-shrink: 0;
+}
+/* Asegurar que el contenedor del carrusel esté bien centrado */
+.image-gallery {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0; /* Eliminar margen inferior si lo hay */
+}
+.image-slide img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .image-slide {
+        width: 100%;
+    }
+}
+/* Evitar desplazamiento horizontal */
+html, body {
+    overflow-x: hidden;  /* Oculta el scroll horizontal */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.image-section {
+    margin-bottom: 70px; /* Ajusta según necesites */
+}
+
+.dire-container {
+    background-color: #2c3e50; /* Fondo gris azulado */
+    text-align: left;
+    padding: 20px;
+    color: white; /* Texto en blanco para que contraste */
+}
+
+.contact-info p {
+    margin: 5px 0; /* Ajusta los espacios entre líneas */
+}
+
+.flash-messages {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    color: white; /* Cambiar el color del mensaje a blanco */
+    background-color: green; /* Cambia el color de fondo si lo deseas */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Estilo para la sección de misión y visión */
+.empresa-seccion {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+
+.columna {
+    width: 48%; /* 48% para cada columna, con un espacio entre ellas */
+    padding: 20px;
+}
+
+.izquierda, .derecha {
+    text-align: justify; /* Justificación de texto */
+    color: white; /* Texto blanco */
+    background-color: #0077B6; /* Fondo semitransparente negro */
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar el cuadro */
+}
+
+/* Estilo para los títulos de la misión, visión e historia */
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: white; /* Título blanco */
+}
+
+/* Estilo para la historia de la empresa */
+.historia {
+    text-align: justify; /* Justificación de texto en historia */
+    margin-top: 40px;
+    font-size: 18px;
+    padding: 20px;
+    color: white; /* Texto blanco */
+    background-color: #0077B6; /* Fondo semitransparente negro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar el cuadro */
+}
+
+.historia h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: white; /* Título de historia blanco */
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu-container {
+        display: none; /* Oculta el menú de navegación en pantallas pequeñas */
+    }
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%; /* Puedes dejar esto o ajustarlo aún más si lo deseas */
+        padding: 15px; /* Ajusta el padding */
+        transform: scale(0.85); /* Aplica la escala para hacerlo más pequeño */
+        transform-origin: top center; /* Asegura que la reducción de tamaño sea desde el centro superior */
+    }
+
+    .form-group {
+        margin-bottom: 10px; /* Reduce el margen entre los campos */
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px; /* Ajusta el tamaño de fuente para que todo quepa */
+        padding: 8px; /* Ajusta el padding de los campos */
+    }
+
+    .form-group label {
+        font-size: 14px; /* Ajusta el tamaño de las etiquetas */
+    }
+
+    button[type="submit"] {
+        padding: 12px; /* Ajusta el tamaño del botón */
+    }
+}

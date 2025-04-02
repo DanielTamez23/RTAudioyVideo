@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/LOGO.png') }}" alt="RT Audio y Video" class="logo">
+            </a>
+        </div>
+        <div class="title-container">
+            <h1>Servicios</h1>
+        </div>
+        <div class="menu-container">
+            <a href="{{ url_for('home') }}">Inicio</a>
+            <a href="{{ url_for('services') }}">Servicios</a>
+            <a href="{{ url_for('repair') }}">Reparación</a>
+            <a href="{{ url_for('about') }}">Conócenos</a>
+        </div>
+    </div>
+
+    <div class="contenido">
+        <h2>En RT Audio y Video ofrecemos servicios de calidad para nuestros clientes </h2>
+        <p>Nuestro principal servicio es el Servicio de Reparación en electrónica y en Línea blanca.</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 RT Audio y Video. Todos los derechos reservados.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

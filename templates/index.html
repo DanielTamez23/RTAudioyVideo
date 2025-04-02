@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT Audio y Video</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <!-- Encabezado -->
+    <div class="header">
+        <!-- Parte izquierda: Logo -->
+        <div class="logo-container">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/LOGO.png') }}" alt="RT Audio y Video" class="logo">
+            </a>
+        </div>
+        
+        <!-- Parte central: Título y subtítulo -->
+        <div class="title-container">
+            <h1>RT Audio y Video</h1>
+            <p class="subtitulo">Empresa de reparaciones electrónicas y de línea blanca en Monterrey</p>
+        </div>
+
+        <!-- Parte derecha: Enlaces de navegación -->
+        <div class="menu-container">
+            <a href="{{ url_for('home') }}">Inicio</a>
+            <a href="#services">Servicios</a>
+            <a href="#repair">Reparación</a>
+            <a href="#about">Conócenos</a>
+        </div>
+    </div>
+
+<!-- Carrusel de imágenes -->
+<div class="carousel-container">
+    <div class="image-gallery-container">
+        <div class="image-slide"><img src="static/images/Carrucel/image1.jpeg" alt="Imagen 1"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image2.jpeg" alt="Imagen 2"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image3.jpeg" alt="Imagen 3"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image4.jpeg" alt="Imagen 4"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image5.jpeg" alt="Imagen 5"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image6.jpeg" alt="Imagen 6"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image7.jpeg" alt="Imagen 7"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image8.jpeg" alt="Imagen 8"></div>
+        <div class="image-slide"><img src="static/images/Carrucel/image9.jpeg" alt="Imagen 9"></div>
+    </div>
+</div>
+
+<div id="services"></div>
+<!-- Contenedor con fondo oscuro para "Servicios" -->
+    <div class="servicios-container">
+        <h2 class="servicios-title">Servicios</h2>
+    </div>
+</div>
+
+<!-- Imagen de fondo y texto centrado -->
+<div class="image-section">
+    <div class="image-background">
+        <div class="text-overlay">
+            <a href="#repair" class="cta-link">Repara tu teléfono</a>
+        </div>
+    </div>
+</div>
+
+<!-- Imagen de fondo y texto centrado -->
+<div class="image-section">
+    <div class="image-background2">
+        <div class="text-overlay">
+            <a href="#repair" class="cta-link">Repara tu bocina amplificada</a>
+        </div>
+    </div>
+</div>
+
+<!-- Imagen de fondo y texto centrado -->
+<div class="image-section">
+    <div class="image-background3">
+        <div class="text-overlay">
+            <a href="#repair" class="cta-link">Repara tu televisión</a>
+        </div>
+    </div>
+</div>
+
+<!-- Imagen de fondo y texto centrado -->
+<div class="image-section">
+    <div class="image-background4">
+        <div class="text-overlay">
+            <a href="#repair" class="cta-link">Repara tu microondas</a>
+        </div>
+    </div>
+</div>
+
+<!-- Imagen de fondo y texto centrado -->
+<div class="image-section">
+    <div class="image-background5">
+        <div class="text-overlay">
+            <a href="#repair" class="cta-link">Repara tu bocina</a>
+        </div>
+    </div>
+</div>
+
+<div id="repair">
+    <!-- Formulario de reparación (trasladado desde repair.html) -->
+    <div class="ubicacion-container">
+        <h2>Solicita la reparación de tu equipo</h2>
+    </div>
+</div>
+
+<!-- Mensaje adicional -->
+<p class="mensaje-reparacion" style="text-align: center; font-size: 18px; margin-top: 10px; color: white;">
+    Por favor, proporciona la siguiente información para procesar tu solicitud de reparación.
+</p>
+
+    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="form-container">
+        <form action="{{ url_for('repair') }}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Equipo dañado:</label>
+                <select id="categoria" name="categoria" required>
+                    <option value="" disabled selected>Seleccione el tipo de equipo</option>
+                    <option value="Celular">Celular</option>
+                    <option value="Microondas">Microondas</option>
+                    <option value="Televisión">Televisión</option>
+                    <option value="Bocina Amplificada">Bocina Amplificada</option>
+                    <option value="Bocina">Bocina</option>
+                    <option value="Otros">Otros</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción del problema:</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">Teléfono de WhatsApp:</label>
+                <input type="tel" id="whatsapp" name="whatsapp" required pattern="[0-9]{10}" placeholder="Ej: 5512345678">
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo Electrónico:</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+
+            <button type="submit">Enviar solicitud</button>
+        </form>
+        <!-- Mensaje de confirmación (inicialmente oculto) -->
+        <div id="mensaje-confirmacion" style="display: none; color: green; font-weight: bold; margin-top: 10px;">
+            ¡Se envió tu reporte correctamente! En máximo 2 horas se mandará la cotización a tu correo y teléfono registrados.
+        </div>
+    </div>
+</div>
+
+<div id="about">
+    <!-- Sección de ubicación -->
+    <div class="ubicacion-container">
+        <h2>¿Quiénes somos y dónde estamos?</h2>
+    </div>
+</div>
+
+<div class="empresa-seccion">
+    <!-- Misión -->
+    <div class="columna izquierda">
+        <h2>Misión</h2>
+        <p>
+            Nuestra misión es proporcionar una experiencia de servicio de reparación de alta calidad, en tiempo destacable, transparencia, atención impecable y soluciones innovadoras para equipos electrónicos y de línea blanca, asegurando la satisfacción total de nuestros clientes a un precio que supera la competencia. 
+        </p>
+    </div>
+
+    <!-- Visión -->
+    <div class="columna derecha">
+        <h2>Visión</h2>
+        <p>
+            Ser la empresa líder en el mercado de reparaciones electrónicas y de línea blanca, reconocida por su excelencia, atención al cliente, velocidad, transparencia, innovación y compromiso con el cliente.
+        </p>
+    </div>
+</div>
+
+<!-- Historia de la empresa -->
+<div class="historia">
+    <h2>Historia de la Empresa</h2>
+    <p>
+        Fundada el 8 de enero de 1996 por Rene Tamez, RT Audio y Video ha sido pionera en el sector de reparaciones electrónicas, brindando soluciones rápidas y eficaces a nuestros clientes en Monterrey. A lo largo de estos 29 años, hemos expandido nuestros servicios y crecido junto con la tecnología para brindar trabajos actualizados y destacados en el mercado. Somos un negocio lleno de experiencia, éxito y aprendizajes. 
+    </p>
+</div>
+
+<div class="ubicacion">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d898.9172149064468!2d-100.33235750649828!3d25.682269583088438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866295f3d53a326f%3A0xbae2fe0718fb322f!2s20%20de%20Noviembre%20525%2C%20Centro%2C%2064000%20Monterrey%2C%20N.L.!5e0!3m2!1ses!2smx!4v1743439769556!5m2!1ses!2smx" 
+        width="600" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+
+<div class="dire-container"> 
+    <h2>Contáctanos</h2>
+    <div class="contact-info">
+        <p><strong>Dirección:</strong> 20 de Noviembre 525, Centro, 64000 Monterrey, N.L.</p>
+        <p><strong>Teléfono:</strong> 81-4667-4469 y 81-4667-4470</p>
+        <p><strong>Email:</strong> rtamez@rtaudioyvideo.com.mx</p>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 RT Audio y Video. Todos los derechos reservados.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+ <!-- Mostrar mensajes flash en la página principal -->
+ {% with messages = get_flashed_messages() %}
+ {% if messages %}
+     <div class="flash-messages">
+         {% for message in messages %}
+             <p>{{ message }}</p>
+         {% endfor %}
+     </div>
+ {% endif %}
+{% endwith %}
+
+</body>
+</html>
