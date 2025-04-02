@@ -6,6 +6,8 @@ import requests
 
 app = Flask(__name__)
 
+app.secret_key = "supersecreto"  # Aquí puedes poner una clave secreta única y segura
+
 # Ruta del archivo Excel
 EXCEL_FILE = "reparaciones.xlsx"
 
@@ -100,5 +102,4 @@ def about():
     return render_template("about.html")
 
 if __name__ == "__main__":
-    app.secret_key = "supersecreto"  # Necesario para mostrar mensajes flash
     app.run(host="0.0.0.0", port=5000, debug=True)
