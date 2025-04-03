@@ -47,8 +47,8 @@ def get_gmail_service():
                     "auth_uri": os.getenv('AUTH_URI'),
                     "token_uri": os.getenv('TOKEN_URI'),
                     "auth_provider_x509_cert_url": os.getenv('AUTH_PROVIDER_X509_CERT_URL'),
-                    "redirect_uris": os.getenv('REDIRECT_URIS').split(','),  # Asumiendo que es una lista separada por comas
-                    "javascript_origins": os.getenv('JAVASCRIPT_ORIGINS').split(',')
+                    "redirect_uris": os.getenv('REDIRECT_URIS'),  # Asumiendo que es una lista separada por comas
+                    "javascript_origins": os.getenv('JAVASCRIPT_ORIGINS')
                 }
             }
 
