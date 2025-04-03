@@ -2,14 +2,21 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from datetime import datetime
 import pandas as pd
 import os
-import requests
+from googleapiclient.discovery import build
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+import base64
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
-
 app.secret_key = "supersecreto"  # Aquí puedes poner una clave secreta única y segura
 
 # Ruta del archivo Excel
 EXCEL_FILE = "reparaciones.xlsx"
+
+# Credenciales y alcance de acceso
+SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 
 # Función para guardar datos en Excel
 def guardar_en_excel(datos):
@@ -21,10 +28,42 @@ def guardar_en_excel(datos):
 
     df.to_excel(EXCEL_FILE, index=False)
 
-# Función para enviar correo utilizando Mailgun API
+# Función para obtener el servicio de Gmail
+def get_gmail_service():
+    creds = None
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            # Usamos las variables de entorno para las credenciales de cliente
+            client_config = {
+                "installed": {
+                    "client_id": os.getenv('CLIENT_ID'),
+                    "client_secret": os.getenv('CLIENT_SECRET'),
+                    "project_id": os.getenv('PROJECT_ID'),
+                    "auth_uri": os.getenv('AUTH_URI'),
+                    "token_uri": os.getenv('TOKEN_URI'),
+                    "auth_provider_x509_cert_url": os.getenv('AUTH_PROVIDER_X509_CERT_URL'),
+                    "redirect_uris": os.getenv('REDIRECT_URIS').split(','),  # Asumiendo que es una lista separada por comas
+                    "javascript_origins": os.getenv('JAVASCRIPT_ORIGINS').split(',')
+                }
+            }
+
+            flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
+            creds = flow.run_local_server(port=0)
+        
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+    
+    service = build('gmail', 'v1', credentials=creds)
+    return service
+
+# Función para enviar correo utilizando la API de Gmail
 def enviar_correo(datos):
-    API_KEY = "4cff576d549ae6d9ff83072e336f4ee4-f6202374-2b4cb6b0"  # Reemplaza con tu API Key de Mailgun
-    DOMAIN = "sandboxcc309873941a425d99842f800d7d6a41.mailgun.org"  # Reemplaza con tu dominio Mailgun
+    service = get_gmail_service()  # Obtiene el servicio de Gmail
 
     subject = "Nueva solicitud de reparación"
     body = f"""
@@ -39,15 +78,46 @@ def enviar_correo(datos):
     Hora de Envío: {datos['Hora de Envío']}
     """
 
-    return requests.post(
-        f"https://api.mailgun.net/v3/{DOMAIN}/messages",
-        auth=("api", API_KEY),
-        data={
-            "from": f"Mailgun Sandbox <postmaster@{DOMAIN}>",
-            "to": "danieltamezmtz@hotmail.com",  # Reemplaza con tu correo
-            "subject": subject,
-            "text": body
-        })
+    message = create_message("me", "danieltamezmtz@hotmail.com", subject, body)
+    send_message(service, "me", message)
+
+# Crear mensaje en formato MIME
+def create_message(sender, to, subject, body):
+    message = MIMEText(body)
+    message['to'] = to
+    message['from'] = sender
+    message['subject'] = subject
+    raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
+    return {'raw': raw_message}
+
+# Enviar el mensaje a través de la API de Gmail
+def send_message(service, sender, message):
+    try:
+        message = service.users().messages().send(userId=sender, body=message).execute()
+        print('Mensaje enviado: %s' % message['id'])
+        return message
+    except Exception as error:
+        print(f'Error al enviar mensaje: {error}')
+
+# Ruta en Flask para manejar el formulario
+@app.route("/enviar_solicitud", methods=["POST"])
+def enviar_solicitud():
+    if request.method == "POST":
+        datos = {
+            'Nombre': request.form['nombre'],
+            'Teléfono WhatsApp': request.form['telefono'],
+            'Correo': request.form['correo'],
+            'Categoría': request.form['categoria'],
+            'Marca': request.form['marca'],
+            'Descripción': request.form['descripcion'],
+            'Hora de Envío': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+
+        guardar_en_excel(datos)  # Guardamos los datos en el archivo Excel
+        enviar_correo(datos)  # Enviamos el correo con la información de la solicitud
+
+        flash("Solicitud enviada con éxito", "success")
+        return redirect(url_for("index"))  # Redirigir a la página principal
 
 @app.route('/')
 def home():
