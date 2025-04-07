@@ -81,7 +81,7 @@ def repair():
 @app.route('/descargar_reparaciones', methods=["GET"])
 def descargar_reparaciones():
     # Ruta donde se encuentra el archivo 'reparaciones.xlsx'
-    ruta_archivo = os.path.join(os.getcwd(), 'RT Audio y Video', 'reparaciones.xlsx')
+    ruta_archivo = os.path.join(os.getcwd(), 'reparaciones.xlsx')
     
     # Asegúrate de que la ruta sea correcta y que el archivo exista
     if os.path.exists(ruta_archivo):
