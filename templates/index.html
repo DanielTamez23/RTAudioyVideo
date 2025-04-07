@@ -232,16 +232,6 @@
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 
- <!-- Mostrar mensajes flash en la página principal -->
- {% with messages = get_flashed_messages() %}
- {% if messages %}
-     <div class="flash-messages">
-         {% for message in messages %}
-             <p>{{ message }}</p>
-         {% endfor %}
-     </div>
- {% endif %}
-{% endwith %}
 
 </body>
 </html>
