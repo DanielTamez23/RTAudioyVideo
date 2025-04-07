@@ -2,6 +2,9 @@ from flask import Flask, send_from_directory, render_template, request, flash, r
 from datetime import datetime
 import pandas as pd
 import os
+import pytz
+
+zona_monterrey = pytz.timezone('America/Monterrey')
 
 app = Flask(__name__)
 app.secret_key = "supersecreto"  # Aquí puedes poner una clave secreta única y segura
@@ -31,7 +34,7 @@ def enviar_solicitud():
             'Categoría': request.form['categoria'],
             'Marca': request.form['marca'],
             'Descripción': request.form['descripcion'],
-            'Hora de Envío': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'Hora de Envío': datetime.now(zona_monterrey).strftime("%Y-%m-%d %H:%M:%S")
         }
 
         guardar_en_excel(datos)  # Guardamos los datos en el archivo Excel
@@ -46,36 +49,6 @@ def home():
 @app.route('/services')
 def services():
     return render_template("services.html")
-
-@app.route('/repair', methods=["GET", "POST"])
-def repair():
-    if request.method == "POST":
-        nombre = request.form["nombre"]
-        whatsapp = request.form["whatsapp"]
-        correo = request.form["correo"]
-        categoria = request.form["categoria"]
-        marca = request.form["marca"]
-        descripcion = request.form["descripcion"]
-
-        # Guardar en Excel con la hora de envío
-        datos = {
-            "Nombre": nombre,
-            "Teléfono WhatsApp": whatsapp,
-            "Correo": correo,
-            "Categoría": categoria,
-            "Marca": marca,
-            "Descripción": descripcion,
-            "Hora de Envío": datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Fecha y hora actual
-        }
-        
-        # Guardar en Excel
-        guardar_en_excel(datos)
-
-        # Mensaje flash para mostrar en la página
-        flash("¡Se envió tu reporte correctamente! En poco tiempo nos contactaremos contigo.")
-        return redirect(url_for('home'))  # Redirigir a la página de inicio
-
-    return render_template("repair.html")
 
 # Ruta para descargar el archivo de reparaciones
 @app.route('/descargar_reparaciones', methods=["GET"])
