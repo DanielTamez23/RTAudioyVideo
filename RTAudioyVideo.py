@@ -42,6 +42,25 @@ def enviar_solicitud():
         flash("Solicitud enviada con éxito", "success")
         return redirect(url_for("index"))  # Redirigir a la página principal
 
+@app.route('/repair', methods=["GET", "POST"])
+def repair():
+    if request.method == "POST":
+        datos = {
+            'Nombre': request.form['nombre'],
+            'Teléfono WhatsApp': request.form['whatsapp'],
+            'Correo': request.form['correo'],
+            'Categoría': request.form['categoria'],
+            'Marca': request.form['marca'],
+            'Descripción': request.form['descripcion'],
+            'Hora de Envío': datetime.now(zona_monterrey).strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        guardar_en_excel(datos)
+        flash("¡Se envió tu reporte correctamente! En poco tiempo nos contactaremos contigo.")
+        return redirect(url_for('home'))
+
+    return render_template("repair.html")
+
 @app.route('/')
 def home():
     return render_template("index.html")
