@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, send_from_directory, render_template, request, flash, redirect, url_for
 from datetime import datetime
 import pandas as pd
 import os
@@ -76,6 +76,18 @@ def repair():
         return redirect(url_for('home'))  # Redirigir a la página de inicio
 
     return render_template("repair.html")
+
+# Ruta para descargar el archivo de reparaciones
+@app.route('/descargar_reparaciones', methods=["GET"])
+def descargar_reparaciones():
+    # Ruta donde se encuentra el archivo 'reparaciones.xlsx'
+    ruta_archivo = os.path.join(os.getcwd(), 'RT Audio y Video', 'reparaciones.xlsx')
+    
+    # Asegúrate de que la ruta sea correcta y que el archivo exista
+    if os.path.exists(ruta_archivo):
+        return send_from_directory(os.path.dirname(ruta_archivo), 'reparaciones.xlsx', as_attachment=True)
+    else:
+        return "Archivo no encontrado", 404
 
 @app.route('/about')
 def about():
