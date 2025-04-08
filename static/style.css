@@ -544,3 +544,32 @@ h2 {
         padding: 12px; /* Ajusta el tamaño del botón */
     }
 }
+
+.contact-icons {
+    position: fixed;  /* Fija los íconos al lado derecho de la pantalla */
+    right: 10px;      /* Posiciona a la derecha */
+    bottom: 100px;     /* Posiciona a 10px del borde inferior */
+    z-index: 1000;    /* Asegura que los íconos estén sobre otros elementos */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;        /* Espacio entre los íconos */
+}
+
+.contact-icon img {
+    width: 50px;      /* Tamaño de los íconos */
+    height: 50px;     /* Tamaño de los íconos */
+    border-radius: 30%; /* Si deseas los íconos redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para darles un efecto flotante */
+    transition: transform 0.3s ease;
+}
+
+.contact-icon img:hover {
+    transform: scale(1.1); /* Efecto de aumento cuando pasas el ratón por encima */
+}
+
+@media (max-width: 768px) {
+    .contact-icon img {
+        width: 50px;   /* Aumenta el tamaño en pantallas pequeñas */
+        height: 50px;  /* Aumenta el tamaño en pantallas pequeñas */
+    }
+}
