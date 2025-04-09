@@ -470,6 +470,7 @@ html, body {
 .columna {
     width: 48%; /* 48% para cada columna, con un espacio entre ellas */
     padding: 20px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
 }
 
 .izquierda, .derecha {
@@ -479,6 +480,20 @@ html, body {
     padding: 20px;
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar el cuadro */
+}
+
+@media (max-width: 768px) { 
+    /* En pantallas pequeñas, hacer que las columnas ocupen el 100% de ancho */
+    .columna {
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Ajustar el texto para móviles */
+    .izquierda, .derecha {
+        text-align: left; /* Cambiar a texto alineado a la izquierda en lugar de justificar */
+        padding: 15px;
+    }
 }
 
 /* Estilo para los títulos de la misión, visión e historia */
@@ -572,4 +587,152 @@ h2 {
         width: 50px;   /* Aumenta el tamaño en pantallas pequeñas */
         height: 50px;  /* Aumenta el tamaño en pantallas pequeñas */
     }
+}
+
+@media (max-width: 768px) {
+    .title-container h1 {
+        font-size: 18px; /* o el tamaño que prefieras */
+    }
+
+    .subtitulo {
+        font-size: 12px; /* opcional: ajustar el subtítulo también */
+    }
+    
+    .logo {
+        width: 90px; /* Tamaño reducido del logo */
+        float: left; /* Alinear el logo a la izquierda */
+        margin-right: 10px; /* Espacio entre el logo y el texto */
+    }
+}
+
+/* Estilos generales del menú */
+.navbar {
+    position: relative;  /* Para que se mantenga en su posición */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #003366; /* Fondo azul fuerte */
+    z-index: 1000;  /* Asegura que esté al frente cuando se active */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;  /* Un poco más de espacio */
+}
+
+/* Quitar logo en la barra de navegación */
+.navbar .logo {
+    display: none; /* Esto oculta el logo */
+}
+
+/* Estilo para los enlaces de navegación */
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: column; /* Cambié a columna para el menú móvil */
+    opacity: 0;  /* Inicialmente oculto */
+    max-height: 0;  /* Oculta el menú */
+    overflow: hidden;
+    transition: all 0.3s ease; /* Animación para abrir el menú */
+}
+
+.nav-links li {
+    margin-left: 0px;
+    margin-top: 15px; /* Agrega margen entre los enlaces */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    display: block;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 5px; /* Bordes redondeados para los enlaces */
+    transition: background-color 0.3s ease; /* Animación para el cambio de color */
+}
+
+/* Efecto hover y activo */
+.nav-links a:hover {
+    background-color: #005bb5; /* Azul claro cuando se pasa el mouse */
+}
+
+.nav-links a:active {
+    background-color: #003366; /* Mantén el azul cuando se selecciona */
+}
+
+/* Estilo para el icono del menú hamburguesa */
+.menu-icon {
+    display: none; /* Inicialmente oculto en pantallas grandes */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+    width: 30px;
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+/* Estilo para las barras del menú */
+.bar {
+    height: 3px;  /* Un poco más grueso para mayor visibilidad */
+    width: 100%;
+    background-color: white;
+}
+
+/* Mostrar el menú hamburguesa solo en pantallas pequeñas */
+@media (max-width: 600px) {
+    .nav-links {
+        display: flex;  /* Ahora mostramos los enlaces */
+        flex-direction: column;
+        width: 100%;
+        background-color: #333; /* Fondo oscuro para el menú desplegable */
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 20px 0;
+        opacity: 1;  /* Hace visible el menú */
+        max-height: 500px;  /* Asegura que el menú tenga suficiente espacio */
+        display: none;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .menu-icon {
+        display: flex;  /* Muestra el icono del menú en móviles */
+    }
+
+    .nav-links.active {
+        opacity: 1;  /* Muestra el menú cuando está activo */
+        max-height: 500px;  /* Ajusta la altura para que se vea bien */
+        display: flex;
+    }
+}
+
+.scroll-to-top {
+    position: fixed; /* Posición fija */
+    top: 20px; /* Distancia desde la parte superior */
+    right: 20px; /* Distancia desde la parte derecha */
+    background-color: #0077B6; /* Fondo azul */
+    color: white; /* Color del icono */
+    font-size: 24px; /* Tamaño del icono */
+    padding: 10px;
+    border: none;
+    border-radius: 50%; /* Bordes redondeados */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+    transition: background-color 0.3s ease; /* Transición de color */
+}
+
+.scroll-to-top:hover {
+    background-color: #005f73; /* Color cuando el ratón pasa sobre el botón */
+}
+
+.scroll-to-top i {
+    font-size: 24px; /* Ajustar el tamaño del icono */
 }
