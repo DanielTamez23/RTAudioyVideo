@@ -10,10 +10,7 @@ window.onscroll = function() {
 
 // Función que se ejecuta al hacer clic en el botón de "scroll to top"
 function scrollToTop() {
-    // Usamos scrollIntoView() para hacer scroll suave hacia el encabezado
-    document.querySelector('.header').scrollIntoView({
-        behavior: 'smooth'
-    });
+    document.querySelector('.header').scrollIntoView({ behavior: 'smooth' });
 }
 
 // Función para alternar el menú hamburguesa
@@ -40,22 +37,34 @@ menuLinks.forEach(link => {
 let currentSlide = 0;
 const slides = document.querySelectorAll('.image-slide');
 const totalSlides = slides.length;
+const carouselContainer = document.querySelector('.carousel-container');  // Contenedor del carrusel
 
+// Función para mostrar una imagen del carrusel
 function showSlide(index) {
     if (index >= totalSlides) currentSlide = 0;
     if (index < 0) currentSlide = totalSlides - 1;
-    slides.forEach((slide, i) => {
-        slide.style.display = i === currentSlide ? 'block' : 'none';
-    });
+
+    // Mover el contenedor del carrusel para mostrar las imágenes de manera fluida
+    const offset = -currentSlide * 33.333;  // Desplazamos el carrusel de 1/3 de su ancho cada vez
+    carouselContainer.style.transition = 'transform 0.5s ease';  // Hacemos que el movimiento sea suave
+    carouselContainer.style.transform = `translateX(${offset}%)`;
 }
 
+// Función para avanzar al siguiente slide
 function nextSlide() {
     currentSlide++;
+    if (currentSlide >= totalSlides - 2) {  // Hacer que el carrusel vuelva al principio cuando llegue al final
+        currentSlide = 0;
+    }
     showSlide(currentSlide);
 }
 
+// Función para retroceder al slide anterior
 function prevSlide() {
     currentSlide--;
+    if (currentSlide < 0) {  // Hacer que el carrusel vuelva al final cuando llegue al principio
+        currentSlide = totalSlides - 3;
+    }
     showSlide(currentSlide);
 }
 
@@ -65,9 +74,57 @@ showSlide(currentSlide);
 // Intervalo de 3 segundos para el carrusel de imágenes
 setInterval(nextSlide, 3000);
 
+// Agregar soporte para swipe (móviles) con movimiento libre
+let startX;
+let endX;
+let touchStartTime;
+let touchEndTime;
+
+const carousel = document.querySelector('.carousel');  // Contenedor del carrusel
+
+carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX;  // Capturar la posición inicial del toque
+    touchStartTime = Date.now();  // Capturamos el tiempo de inicio del toque
+});
+
+carousel.addEventListener('touchmove', (e) => {
+    endX = e.touches[0].pageX;  // Capturar la posición del toque en movimiento
+    const diffX = startX - endX;  // Distancia recorrida en X
+    const offset = -currentSlide * 33.333 + (diffX / window.innerWidth) * 100;  // Ajuste proporcional
+
+    // Mover el carrusel de acuerdo al movimiento
+    carouselContainer.style.transition = 'none';  // Sin transición para un movimiento suave
+    carouselContainer.style.transform = `translateX(${offset}%)`;
+});
+
+carousel.addEventListener('touchend', (e) => {
+    touchEndTime = Date.now();  // Capturamos el tiempo final del toque
+    const diffX = startX - endX;  // Distancia recorrida en X
+    const swipeDuration = touchEndTime - touchStartTime;  // Duración del toque
+
+    // Si el swipe fue suficientemente rápido y largo, avanzar o retroceder según el movimiento
+    if (Math.abs(diffX) > window.innerWidth / 4 || swipeDuration < 200) {
+        if (diffX > 0) {
+            nextSlide();  // Deslizar a la siguiente imagen
+        } else {
+            prevSlide();  // Deslizar a la imagen anterior
+        }
+    } else {
+        showSlide(currentSlide);  // Mantener la posición actual si no fue un swipe lo suficientemente fuerte
+    }
+});
+
+// Asegurarse de que las imágenes se muestren correctamente
+const images = document.querySelectorAll('.image-slide');
+images.forEach(image => {
+    image.style.width = '33.333%';  // Mostrar tres imágenes a la vez
+    image.style.height = 'auto';  // Mantener la proporción de las imágenes
+});
+
 // Implementar la animación para la barra de progreso de carga
 const progressBar = document.querySelector('.progress-bar');
 let progress = 0;
+
 function updateProgressBar() {
     progress += 1;
     progressBar.style.width = progress + '%';
